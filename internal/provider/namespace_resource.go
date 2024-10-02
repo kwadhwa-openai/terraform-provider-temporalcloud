@@ -204,6 +204,7 @@ func (r *namespaceResource) Schema(ctx context.Context, _ resource.SchemaRequest
 			"api_key_auth": schema.BoolAttribute{
 				Description: "If true, Temporal Cloud will use API key authentication for this namespace. If false, mutual TLS (mTLS) authentication will be used.",
 				Optional:    true,
+				Computed:    true,
 			},
 			"codec_server": schema.SingleNestedAttribute{
 				Description: "A codec server is used by the Temporal Cloud UI to decode payloads for all users interacting with this namespace, even if the workflow history itself is encrypted.",
@@ -302,6 +303,7 @@ func (r *namespaceResource) Create(ctx context.Context, req resource.CreateReque
 		mtlAuth = &namespacev1.MtlsAuthSpec{
 			AcceptedClientCa:   plan.AcceptedClientCA.ValueString(),
 			CertificateFilters: certFilters,
+			Enabled:            true,
 		}
 
 		spec.MtlsAuth = mtlAuth
@@ -401,6 +403,7 @@ func (r *namespaceResource) Update(ctx context.Context, req resource.UpdateReque
 		mtlAuth = &namespacev1.MtlsAuthSpec{
 			AcceptedClientCa:   plan.AcceptedClientCA.ValueString(),
 			CertificateFilters: certFilters,
+			Enabled:            true,
 		}
 
 		spec.MtlsAuth = mtlAuth

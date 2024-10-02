@@ -36,6 +36,8 @@ import (
 	"go.temporal.io/sdk/client"
 )
 
+var TemporalCloudAPIVersion = "2024-05-13-00"
+
 // Client is a client for the Temporal Cloud API.
 type Client struct {
 	client.CloudOperationsClient
@@ -44,8 +46,6 @@ type Client struct {
 var (
 	_ client.CloudOperationsClient = &Client{}
 )
-
-var TemporalCloudAPIVersion = "2023-10-01-00"
 
 func NewConnectionWithAPIKey(addrStr string, allowInsecure bool, apiKey string) (*Client, error) {
 
